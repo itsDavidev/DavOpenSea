@@ -1,9 +1,13 @@
+import useIPFs from './lib/hooks/useIPFs';
 import { useNFTs } from './lib/hooks/useNFTs';
 
 function App() {
 	const { NFTs, setNFTsLimit } = useNFTs();
+	console.log(NFTs);
 
-	console.log('app', NFTs);
+	if (NFTs.loading) return <div>Loading...</div>;
+	if (NFTs.Error) return <div>Error: {NFTs.Error.message}</div>;
+
 	return (
 		<div className='bg-black min-h-screen text-blue-600 p-4'>
 			<h2 className='text-center text-2xl'>
@@ -11,14 +15,17 @@ function App() {
 			</h2>
 			<button
 				onClick={() => setNFTsLimit(20)}
-				className='bg-purple-700 py-2 px-4'>
+				className='bg-purple-400 py-2 px-4 text-black'>
 				{' add 20 nfts '}
 			</button>
 			{NFTs?.results?.map(nft => {
 				const metadata = JSON.parse(nft.metadata);
+				const urlImg = useIPFs(metadata.image);
+				console.log(urlImg, '<=', metadata.image);
 				return (
-					<article key={metadata.name}>
+					<article key={nft.token_hash}>
 						<h2>{metadata.name}</h2>
+						<img src={urlImg} alt={metadata.name} className='w-16' />
 					</article>
 				);
 			})}

@@ -1,8 +1,21 @@
 
 
-export async function getDataNfts({ setNftsResults, searchNFTs, options }) {
-    const responseNfts = await searchNFTs(options);
-    console.log('response get Data', responseNfts);
-    console.log(options, 'options');
-    await setNftsResults(responseNfts.result);
+export async function getDataNfts({ initialGetNFTs, SucessGetNFTs, ErorrGetNFTs, searchNFTs, options, }) {
+    try {
+        initialGetNFTs();
+
+        const { result } = await searchNFTs(options);
+
+        SucessGetNFTs(
+            result,
+        )
+
+    } catch (err) {
+
+        ErorrGetNFTs({
+            err,
+        })
+
+    }
+
 }

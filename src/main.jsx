@@ -9,7 +9,9 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 		<MoralisProvider
 			serverUrl={import.meta.env.VITE_SERVER_URL}
 			appId={import.meta.env.VITE_APP_ID}>
-			<App />
+			<div className='bg-black min-h-screen text-white p-4'>
+				<App />
+			</div>
 		</MoralisProvider>
 	</React.StrictMode>
 );

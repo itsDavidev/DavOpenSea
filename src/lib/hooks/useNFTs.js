@@ -94,7 +94,7 @@ export function useNFTs() {
             searchNFTs: Web3Api.token.searchNFTs,
             options: NFTs.options,
         });
-    }, [NFTs.limit, NFTs.options]);
+    }, [NFTs.options.limit, NFTs.options.q, NFTs.options.chain, NFTs.options.filter]);
 
     return {
         NFTs,

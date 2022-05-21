@@ -25,6 +25,16 @@ const NTFsReducer = (state = initialState, action) => {
                 Error: err,
             }
         }
+        case NFTS__ACTIONS._SET_LIMIT_NFT: {
+            const { limit } = action.args;
+            return {
+                ...state,
+                options: {
+                    ...state.options,
+                    limit,
+                }
+            }
+        }
         case NFTS__ACTIONS.
             default: {
                 throw new Error(`Unhandled action type`);

@@ -18,17 +18,26 @@ function App() {
 				className='bg-purple-400 py-2 px-4 text-black'>
 				{' add 20 nfts '}
 			</button>
-			{NFTs?.results?.map(nft => {
-				const metadata = JSON.parse(nft.metadata);
-				const urlImg = useIPFs(metadata.image);
-				console.log(urlImg, '<=', metadata.image);
-				return (
-					<article key={nft.token_hash}>
-						<h2>{metadata.name}</h2>
-						<img src={urlImg} alt={metadata.name} className='w-16' />
-					</article>
-				);
-			})}
+			<section className='flex flex-wrap gap-6'>
+				{NFTs?.results?.map(nft => {
+					const metadata = JSON.parse(nft.metadata);
+					const urlImg = useIPFs(metadata.image);
+					console.log(
+						'naem',
+						metadata.name,
+						'img=',
+						urlImg,
+						'<=',
+						metadata.image
+					);
+					return (
+						<article key={nft.token_hash}>
+							<h2>{metadata.name}</h2>
+							<img src={urlImg} alt className='w-60' />
+						</article>
+					);
+				})}{' '}
+			</section>
 		</div>
 	);
 }
